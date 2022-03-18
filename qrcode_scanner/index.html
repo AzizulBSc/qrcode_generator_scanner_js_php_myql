@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script> -->
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="margin: 10% 20% ;" heigth="100%">
+        <div heigth="50%">
+            <video id="video" width="100%" style="border-radius: 10%;"></video>
+        </div>
+        <div>
+            <!-- <textarea name="" id="text" cols="30" rows="10"></textarea> -->
+            <input type="text" id="text" name="text">
+        </div>
+    </div>
+    <script src="instascan.min.js"></script>
+    <script>
+        //start camera
+        var video = document.getElementById("video");
+        var inputText = document.getElementById("text");
+        var scanner = new Instascan.Scanner({
+            video: video,
+        })
+        Instascan.Camera.getCameras().then(function (our_camera) {
+            if (our_camera.length > 0) {
+                scanner.start(our_camera[0]);
+            }
+            else {
+                alert("Camera Star failed!")
+            }
+        }).catch(function (error) {
+            alert('Function Failed!');
+        })
+
+        scanner.addListener('scan', function (input_value) {
+            inputText.value = input_value;
+        })
+    </script>
+</body>
+
+</html>

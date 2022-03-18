@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="margin:10% 30% ;">
+        <div>
+            <input type="text" id="qrcode" onchange="generate()" placeholder="Entere Your Info..."><br><br>
+        </div>
+        <div id="qrimg">
+        </div>
+    </div>
+
+    <script src="qrcode.min.js"></script>
+    <script>
+        var inputText = document.getElementById("qrcode");
+        var qrImage = document.getElementById("qrimg");
+        var qrCodeImage = new QRCode(qrImage, {
+            width: 250,
+            heigth: 250
+        });
+        function generate() {
+            var data = inputText.value;
+            alert(data)
+            qrCodeImage.makeCode(data);
+        }
+    </script>
+</body>
+
+</html>
